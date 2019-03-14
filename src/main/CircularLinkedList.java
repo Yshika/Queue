@@ -41,7 +41,7 @@ public class CircularLinkedList {
         } else {
             Node temp = head;
             do {
-                System.out.println(" " + temp.data);
+                System.out.print(" " + temp.data);
                 temp = temp.next;
             } while (temp != head);
             System.out.println(" ");
@@ -49,16 +49,59 @@ public class CircularLinkedList {
     }
 
     public void addNodetoHead(int data) {
+        Node n=new Node(data);
+        if(size==0){
+            head=n;
+            tail=n;
+            n.next=head;
+        }
+        else{
+            Node temp=head;
+            n.next=temp;
+            head=n;
+            tail.next=head;
+        }
+        size++;
+    }
 
-
+    public void addNodeToTail(int data){
+        if(size==0){
+            addNodetoHead(data);
+        }
+        else{
+            Node node=new Node(data);
+            tail.next=node;
+            tail=node;
+            tail.next=head;
+            size++;
+        }
     }
 
     public void deleteHead() {
-
+        if(size!=0){
+            Node temp=head;
+            head=head.next;
+            tail.next=head;
+            size--;
+        }
     }
+
 
     public static void main(String[] args) {
         CircularLinkedList linkedList = new CircularLinkedList();
+        linkedList.print();
+        for (int i = 0; i < 5; i++) {
+            linkedList.addNodetoHead(i);
+        }
+        linkedList.print();
+        for (int i = 10; i >= 6; i--) {
+            linkedList.addNodeToTail(i);
+        }
+        linkedList.print();
+        for (int i = 0; i < 4; i++) {
+            linkedList.deleteHead();
+            linkedList.print();
+        }
         linkedList.print();
     }
 }
